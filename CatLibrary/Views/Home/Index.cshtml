@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<head>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+    <script>
+
+        var maleOwnerList = @Html.Raw(Json.Encode(ViewData["MaleOwnerModel"]));
+        var femaleOwnerList = @Html.Raw(Json.Encode(ViewData["FemaleOwnerModel"]));
+
+        $(document).ready(function ()
+        {
+            var maleitems = [];
+            var femaleitems = [];
+
+            // Populate cats for male owners
+            $(maleOwnerList).each(function (index, Element)
+            {
+                maleitems.push($('<li/>').text(Element.Text));
+            });
+            $('#malePets').append.apply($('#malePets'), maleitems);
+
+            // Populate cats for female owners
+            $(femaleOwnerList).each(function (index, Element)
+            {
+             femaleitems.push($('<li/>').text(Element.Text));
+            });
+            $('#femalePets').append.apply($('#femalePets'), femaleitems);
+
+
+        });
+
+
+    </script>
+</head>
+
+<div class="jumbotron">
+    <h2>Cat List</h2>
+    <p class="lead"></p>
+    <p></p>
+</div>
+
+<div class="row">
+    <div>
+        @Html.Label("Male")
+        <ul id="malePets"></ul>
+
+    </div>
+
+    <div>
+        @Html.Label("Female")
+        <ul id="femalePets"></ul>
+    </div>
+
+</div>
